@@ -233,6 +233,22 @@ int belirleme(char *argv)
     }
     return (a);
 }
+int ft_check(char *str2)
+{
+    if (!str2)
+        return (0);
+    char str[5] = "yüz";
+    int i = 0;
+    while (str2[i] && str[i])
+    {
+        if (str[i] != str2[i])
+            break;
+        if (str[i + 1] == '\0' && str2[i + 1] == '\0')
+            return (1);
+        i++;
+    }
+    return (0);
+}
 
 
 int main(int argc, char **argv)
@@ -246,11 +262,21 @@ int main(int argc, char **argv)
         while (argv[i])
         {
             add = belirleme(argv[i]);
+            if (add == 0)
+            {
+                printf("Hatalı girdiniz!\n");
+                return (0);
+            }
             i++;
             if (result >= 1000000)
             {
                 if (add >= 100 && milyon < 1000)
                     milyon = milyon * add;
+                else if (add < 10 && milyon >= 1000 && (ft_check(argv[i]) == 1))
+                {
+                    milyon = milyon + (add * 100);
+                    i++;
+                }
                 else
                 {
                     if (milyon == 1)
@@ -262,6 +288,11 @@ int main(int argc, char **argv)
             {
                 if (add >= 100 && result < 1000)
                     result = result * add;
+                else if (add < 10 && result >= 1000 && (ft_check(argv[i]) == 1))
+                {
+                    result = result + (add * 100);
+                    i++;
+                }
                 else
                 {
                     if (result == 1)
