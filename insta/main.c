@@ -232,6 +232,7 @@ int belirleme(char *argv)
     }
     return (a);
 }
+
 int ft_check(char *str2)
 {
     if (!str2)
@@ -249,6 +250,22 @@ int ft_check(char *str2)
     return (0);
 }
 
+int ft_checkv2(char *str2)
+{
+    if (!str2)
+        return (0);
+    char str[4] = "bir";
+    int i = 0;
+    while (str2[i] && str[i])
+    {
+        if (str[i] != str2[i])
+            break;
+        if (str[i + 1] == '\0' && str2[i + 1] == '\0')
+            return (1);
+        i++;
+    }
+    return (0);
+}
 
 int main(int argc, char **argv)
 {
@@ -302,6 +319,11 @@ int main(int argc, char **argv)
         }
         if (milyon == 1 && add != 1)
             milyon = 0;
+        if (ft_checkv2(argv[i - 1]) && result + milyon < 1000000)
+        {
+            printf("%d\n", result + milyon - 1);
+            return (0);
+        }
         printf("%d\n", result + milyon);
     }
     return (0);
